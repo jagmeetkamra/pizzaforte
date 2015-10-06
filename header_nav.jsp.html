@@ -1,0 +1,24 @@
+<header>
+		<img src="vectorlogo.jpg" height="125" width="125" align="right" alt="logo">
+		<h1>&nbsp;&nbsp;&nbsp; Pizza Forte &#174; </h1>
+</header>
+		<nav>
+		<div id="navitems">
+			<ul>
+			<li><a href="#">Menu</a></li>
+			<li><a href="order.jsp">Order</a></li>
+			<li><a href="#" class="">Promo</a></li>
+		<div id="signin" style="float:right;">
+<%  		if((String)session.getAttribute("username") == null){ %> 
+		<a href="custLogin.jsp">Sign in</a> &nbsp; | &nbsp; <a href="register.jsp" >Register</a> &nbsp;&nbsp;&nbsp;
+<%
+		}
+		else {
+%>
+		welcome &nbsp; <% out.println((String)session.getAttribute("username")); %>
+		&nbsp;&nbsp; | &nbsp;&nbsp; <a href="logout.jsp" >logout </a>&nbsp;&nbsp;&nbsp;
+		<% } %>
+		</div> 
+		</ul>
+		</div>		
+	</nav>

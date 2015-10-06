@@ -1,0 +1,566 @@
+<!DOCTYPE HTML>
+
+<%@ page import="com.beans.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.lang.Int.*" %>
+
+<html lang="en-US">
+	<head>
+		<meta charset = "utf-8">
+		<title> Pizza Forte </title>
+	<link type="text/css" rel="stylesheet" href="corporate.css"/>
+
+	</head>
+	<body>
+		<jsp:include page="header.jsp" />
+
+<%	if((session.getAttribute("allOrders")!=null) && (session.getAttribute("allDrinks")!= null) && (session.getAttribute("allSides")!=null) ){
+		
+		String index = request.getParameter("index");
+		int i = Integer.parseInt(index);
+
+		List orders = (List)session.getAttribute("allOrders");
+		Pizza pizza = (Pizza)orders.get(i);
+		
+		List allDrinks = (List)session.getAttribute("allDrinks");
+		Drinks drinks = (Drinks)allDrinks.get(i);
+		
+		List allSides = (List)session.getAttribute("allSides");
+		Sides sides = (Sides)allSides.get(i);
+%>
+
+<body>
+<div id="master">
+
+<div class="receipt"> 
+<div style="text-align:center;color:red;">
+	Pizza Forte &#174;<br>
+	7899 Steeles Ave W, Brampton<br>
+	(416)-371-9855 | (647)-632-9816 <br>
+	------------------------------------------------------------------ <br><br>
+	Ordered By:
+<%	out.println((String)session.getAttribute("name")); %> <br>
+	Phone Number:
+<%	out.println((String)session.getAttribute("phone")); %> <br>
+	Address: 
+<%	out.println(  " " + (String)session.getAttribute("streetAdress") + " " +(String)session.getAttribute("city") +" " + (String)session.getAttribute("province") + " " +(String)session.getAttribute("postalCode"));%> <br>
+	
+	Time:
+<%	out.println(pizza.getOrderTime()); %> <br>
+</div>
+	
+<hr>	
+<p>
+
+<h3>Quantity</h3>
+  &nbsp;&nbsp;&nbsp;&nbsp;<% out.println(pizza.getQuantity());%> <br><br>
+
+
+-------------------------------------------------------------------
+
+<h3>Size</h3> 
+<% 	
+	if(pizza.getSize() != 0){
+		if(pizza.getSize()==1){ %>
+			&nbsp;&nbsp;&nbsp;&nbsp;Small
+			<br>
+<% 		}
+		if(pizza.getSize()==2){ %>
+			&nbsp;&nbsp;&nbsp;&nbsp;Medium
+			<br>
+<% 		}
+		if(pizza.getSize()==3){ %>
+			&nbsp;&nbsp;&nbsp;&nbsp;Large
+			<br>
+<% 		}
+		if(pizza.getSize()==4){ %>
+			&nbsp;&nbsp;&nbsp;&nbsp;Extra Large
+			<br>
+<% 		}
+		if(pizza.getSize()==5){ %>
+			&nbsp;&nbsp;&nbsp;&nbsp;Party Size
+			<br>
+<% 		}} %>
+
+-------------------------------------------------------------------
+
+<h3>Toppings</h3>
+<h3>Whole</h3>
+<% int w = 0; %> 
+<% 	
+	if(pizza.getPepL() != null){
+	if(pizza.getPepL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Pepperoni
+		<%
+		if(pizza.getPepAmt() != null){
+		if(pizza.getPepAmt().equals("2")){ %>
+			Extra 
+<%		}} %>
+		<br>
+<% 		} w++;}
+	if(pizza.getGcL() != null){
+ 	if(pizza.getGcL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Grilled Chicken
+		<% 
+		if(pizza.getGcAmt() != null){
+		if(pizza.getGcAmt().equals("2")){ %>
+			Extra <br>
+<%		} } %>
+		<br>
+<% 	} w++;}
+	if(pizza.getBcL() != null){
+	if(pizza.getBcL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Bacon
+		<% 
+		if(pizza.getBcAmt() != null){
+		if(pizza.getBcAmt().equals("2")){ %>
+			Extra 
+<%		} } %>
+		<br>
+<% 	} w++;}
+	if(pizza.getBfL() != null){
+	if(pizza.getBfL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Beef
+		<%
+		if(pizza.getBfAmt() != null){ 
+		if(pizza.getBfAmt().equals("2")){ %>
+			Extra 
+<%		} } %>
+		<br>
+<% 	} w++;}
+	if(pizza.getShL() != null){
+	if(pizza.getShL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Smoked Ham
+		<% 
+		if(pizza.getShAmt() != null){
+		if(pizza.getShAmt().equals("2")){ %>
+			Extra
+<%		}} %>
+		<br>
+<% 	} w++;}
+	if(pizza.getOnL() != null){
+	if(pizza.getOnL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Onions
+		<% 
+		if(pizza.getOnAmt() != null){
+		if(pizza.getOnAmt().equals("2")){ %>
+			Extra 
+<%		} } %>
+		<br>
+<% 	} w++;}
+	if(pizza.getBoL() != null){
+	if(pizza.getBoL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Black Olives
+		<% 
+		if(pizza.getBoAmt() != null){
+		if(pizza.getBoAmt().equals("2")){ %>
+			Extra <br>
+<%		} } %>
+		<br>
+<% 	} w++;}
+	if(pizza.getGoL() != null){
+	if(pizza.getGoL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Green Olives
+		<% 
+		if(pizza.getGoAmt() != null){
+		if(pizza.getGoAmt().equals("2")){ %>
+			Extra 
+<%		} } %>
+		<br>
+<% 	} w++;}
+	if(pizza.getMrL() != null){
+	if(pizza.getMrL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Mushrooms
+		<% 
+		if(pizza.getMrAmt() != null){
+		if(pizza.getMrAmt().equals("2")){ %>
+			Extra 
+<%		}} %>
+		<br>
+<% 	} w++;}
+	if(pizza.getSpL() != null){
+	if(pizza.getSpL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Spinach
+		<% 
+		if(pizza.getSpAmt() != null){
+		if(pizza.getSpAmt().equals("2")){ %>
+			Extra 
+<%		}} %>
+		<br>
+<% 	} w++;}
+	if(pizza.getPaL() != null){
+	if(pizza.getPaL().equals("W")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Pine Apple
+		<% 
+		if(pizza.getPaAmt() != null){
+		if(pizza.getPaAmt().equals("2")){ %>
+			Extra 
+<%		}} %>
+		<br>
+<% 	} w++;}
+	if( w==0) { %> &nbsp;&nbsp;&nbsp;&nbsp; -- none -- 
+<%	}
+%> 
+
+	<h3>Left Half</h3> 
+<% int l = 0; %>
+<% 	
+	if(pizza.getPepL() != null){
+	if(pizza.getPepL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Pepperoni 
+		<%
+		if(pizza.getPepAmt() != null){
+		if(pizza.getPepAmt().equals("2")){ %>
+			Extra
+<%		}} %>
+		<br>
+<% 		} l++;}
+	if(pizza.getGcL() != null){
+ 	if(pizza.getGcL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Grilled Chicken
+		<% 
+		if(pizza.getGcAmt() != null){
+		if(pizza.getGcAmt().equals("2")){ %>
+			Extra <br>
+<%		}} %>
+		<br>
+<% 	} l++;}
+	if(pizza.getBcL() != null){
+	if(pizza.getBcL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Bacon
+		<% 
+		if(pizza.getBcAmt() != null){
+		if(pizza.getBcAmt().equals("2")){ %>
+			Extra 
+<%		} } %>
+		<br>
+<% 	} l++;}
+	if(pizza.getBfL() != null){
+	if(pizza.getBfL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Beef
+		<%
+		if(pizza.getBfAmt() != null){ 
+		if(pizza.getBfAmt().equals("2")){ %>
+			Extra 
+<%		}} %>
+		<br>
+<% 	} l++;}
+	if(pizza.getShL() != null){
+	if(pizza.getShL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Smoked Ham
+		<% 
+		if(pizza.getShAmt() != null){
+		if(pizza.getShAmt().equals("2")){ %>
+			Extra
+<%		} } %>
+		<br>
+<% 	} l++;}
+	if(pizza.getOnL() != null){
+	if(pizza.getOnL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Onions
+		<% 
+		if(pizza.getOnAmt() != null){
+		if(pizza.getOnAmt().equals("2")){ %>
+			Extra 
+<%		} } %>
+		<br>
+<% 	} l++;}
+	if(pizza.getBoL() != null){
+	if(pizza.getBoL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Black Olives
+		<% 
+		if(pizza.getBoAmt() != null){
+		if(pizza.getBoAmt().equals("2")){ %>
+			Extra <br>
+<%		} } %>
+		<br>
+<% 	} l++;}
+	if(pizza.getGoL() != null){
+	if(pizza.getGoL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Green Olives
+		<% 
+		if(pizza.getGoAmt() != null){
+		if(pizza.getGoAmt().equals("2")){ %>
+			Extra 
+<%		} } %>
+		<br>
+<% 	} l++;}
+	if(pizza.getMrL() != null){
+	if(pizza.getMrL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Mushrooms
+		<% 
+		if(pizza.getMrAmt() != null){
+		if(pizza.getMrAmt().equals("2")){ %>
+			Extra 
+<%		} } %>
+		<br>
+<% 	} l++;}
+	if(pizza.getSpL() != null){
+	if(pizza.getSpL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Spinach
+		<% 
+		if(pizza.getSpAmt() != null){
+		if(pizza.getSpAmt().equals("2")){ %>
+			Extra 
+<%		} } %>
+		<br>
+<% 	} l++;}
+	if(pizza.getPaL() != null){
+	if(pizza.getPaL().equals("LH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Pine Apple
+		<% 
+		if(pizza.getPaAmt() != null){
+		if(pizza.getPaAmt().equals("2")){ %>
+			Extra 
+<%		} } %>
+		<br>
+<% 	} l++;}
+	if (l==0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; -- none--
+<%	}
+%>
+
+<h3>Right Half</h3> 
+<% int r = 0; %>
+<% 	
+	if(pizza.getPepL() != null){
+	if(pizza.getPepL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Pepperoni
+		<%
+		if(pizza.getPepAmt() != null){
+		if(pizza.getPepAmt().equals("2")){ %>
+			Extra 
+<%		}  } %>
+		<br>
+<% 		} r++;}
+	if(pizza.getGcL() != null){
+ 	if(pizza.getGcL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Grilled Chicken
+		<% 
+		if(pizza.getGcAmt() != null){
+		if(pizza.getGcAmt().equals("2")){ %>
+			Extra <br>
+<%		}  } %>
+		<br>
+<% 	} r++;}
+	if(pizza.getBcL() != null){
+	if(pizza.getBcL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Bacon
+		<% 
+		if(pizza.getBcAmt() != null){
+		if(pizza.getBcAmt().equals("2")){ %>
+			Extra 
+<%		}  } %>
+		<br>
+<% 	} r++;}
+	if(pizza.getBfL() != null){
+	if(pizza.getBfL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Beef
+		<%
+		if(pizza.getBfAmt() != null){ 
+		if(pizza.getBfAmt().equals("2")){ %>
+			Extra 
+<%		}  } %>
+		<br>
+<% 	} r++;}
+	if(pizza.getShL() != null){
+	if(pizza.getShL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Smoked Ham
+		<% 
+		if(pizza.getShAmt() != null){
+		if(pizza.getShAmt().equals("2")){ %>
+			Extra
+<%		}  } %>
+		<br>
+<% 	} r++;}
+	if(pizza.getOnL() != null){
+	if(pizza.getOnL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Onions
+		<% 
+		if(pizza.getOnAmt() != null){
+		if(pizza.getOnAmt().equals("2")){ %>
+			Extra 
+<%		}  } %>
+		<br>
+<% 	} r++;}
+	if(pizza.getBoL() != null){
+	if(pizza.getBoL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Black Olives
+		<% 
+		if(pizza.getBoAmt() != null){
+		if(pizza.getBoAmt().equals("2")){ %>
+			Extra <br>
+<%		}  } %>
+		<br>
+<% 	} r++;}
+	if(pizza.getGoL() != null){
+	if(pizza.getGoL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Green Olives
+		<% 
+		if(pizza.getGoAmt() != null){
+		if(pizza.getGoAmt().equals("2")){ %>
+			Extra 
+<%		}  } %>
+		<br>
+<% 	} r++;}
+	if(pizza.getMrL() != null){
+	if(pizza.getMrL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Mushrooms
+		<% 
+		if(pizza.getMrAmt() != null){
+		if(pizza.getMrAmt().equals("2")){ %>
+			Extra 
+<%		}  } %>
+		<br>
+<% 	} r++;}
+	if(pizza.getSpL() != null){
+	if(pizza.getSpL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Spinach
+		<% 
+		if(pizza.getSpAmt() != null){
+		if(pizza.getSpAmt().equals("2")){ %>
+			Extra 
+<%		}  } %>
+		<br>
+<% 	} r++;}
+	if(pizza.getPaL() != null){
+	if(pizza.getPaL().equals("RH")){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;Pine Apple
+		<% 
+		if(pizza.getPaAmt() != null){
+		if(pizza.getPaAmt().equals("2")){ %>
+			Extra 
+<%		}  } %>
+		<br>
+<% 	} r++;}
+	if(r==0) {%> &nbsp;&nbsp;&nbsp;&nbsp; -- none -- <br>
+<%	}
+%>
+-------------------------------------------------------------------
+<h3>Drinks</h3>
+<% int x = 0; %>
+
+<%	if(drinks.getCokeCan()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(1*drinks.getCokeCan()); %> Coke Can .................................... $<% out.println(1*drinks.getCokeCan()); %><br>
+<% 		x++;
+  	}
+	if(drinks.getCokeBottle()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(drinks.getCokeBottle()); %> Coke Bottle ................................. $<% out.println(2*drinks.getCokeBottle()); %><br>
+<% 		x++;
+  	}
+	if(drinks.getPepsiCan()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(1*drinks.getPepsiCan()); %> Pepsi Can ................................... $<% out.println(1*drinks.getPepsiCan()); %><br>
+<% 		x++;
+  	}
+	if(drinks.getPepsiBottle()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(1*drinks.getGingerCan()); %> Pepsi Bottle ................................ $<% out.println(1*drinks.getGingerCan()); %> <br>
+<% 		x++;
+  	}
+	if(drinks.getGingerCan()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp;  <% out.println(1*drinks.getGingerCan()); %> Canada Dry Ginger Ale Can ................... $<% out.println(1*drinks.getGingerCan()); %><br> 
+<% 		x++;
+  	}
+	if(drinks.getGingerBottle()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(2*drinks.getGingerBottle()); %> Canada Dry Ginger Ale Bottle................. $<% out.println(2*drinks.getGingerBottle()); %><br>
+<% 		x++;
+  	}
+	if(drinks.getCrushCan()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(drinks.getCrushCan()); %> Orange Crush Can ............................ $<% out.println(1*drinks.getCrushCan()); %><br>
+<% 		x++;
+ 	}
+	if(drinks.getCrushBottle()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(drinks.getCrushBottle()); %> Orange Crush Bottle ......................... $<% out.println(2*drinks.getCrushBottle()); %><br><br>
+<% 		x++;
+ 	}
+	if(x==0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; --none-- <br>
+<%	} %> 
+-------------------------------------------------------------------
+<h3>Sides</h3>
+<% int y = 0; %>
+<%	if(sides.getLasagna()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(sides.getLasagna()); %> Lasagna ..................................... $<% out.println(4.50*sides.getLasagna()); %> <br>
+<%  		y++;
+	}
+	if(sides.getFries()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(sides.getFries()); %> Fries ....................................... $<% out.println(3*sides.getFries()); %>  <br>
+<%  		y++;
+	}
+	if(sides.getPasta()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(sides.getPasta()); %> Pasta ....................................... $<% out.println(4.25*sides.getPasta()); %> <br>
+<%  		y++;
+	}
+	if(sides.getGarlicBread()!= 0){ %>
+		&nbsp;&nbsp;&nbsp;&nbsp; <% out.println(sides.getGarlicBread()); %> Garic Bread ................................. $<% out.println(4*sides.getGarlicBread()); %> <br><br>
+<%  		y++;
+	}
+	else if(y==0) { %>
+		&nbsp;&nbsp;&nbsp;&nbsp; -- none --<br><br>
+	     <% }%>
+-------------------------------------------------------------------
+<h3>Special Instructions</h3> 
+<% int s = 0;	
+	if(pizza.getDough() != 0){
+		if(pizza.getDough()==2){ %>
+			&nbsp;&nbsp;&nbsp;&nbsp; Use Dough - Whole Wheat
+			<br>
+			
+<% 		 s++;}
+		if(pizza.getDough()==3){ %>
+			&nbsp;&nbsp;&nbsp;&nbsp; Use Dough - Whole Grain
+			<br>
+			
+<% 	 s++;} }
+	if(pizza.getCrustStyle() != 0){
+ 		if(pizza.getCrustStyle()==2){ %>
+			&nbsp;&nbsp;&nbsp;&nbsp; Thin Crust
+			<br>
+<% 		 s++; }
+		if(pizza.getCrustStyle()==3){ %>
+			&nbsp;&nbsp;&nbsp;&nbsp; Thich Crust
+			<br>
+<% 		s++; }
+		if(pizza.getCrustStyle()==4){ %>
+			&nbsp;&nbsp;&nbsp;&nbsp; Pretzel Crust
+			<br>
+<% 		s++; }  }
+		
+	
+	if(s==0) {%> &nbsp;&nbsp;&nbsp;&nbsp; -- none -- <br>
+<%	}
+%>
+	<br><hr>	
+		
+	Sub Total______________________________$ <% out.println(pizza.getTotal()); %><br><br>
+	HST (13%)______________________________$ <% out.println(0.13*pizza.getTotal()); %><br><br>
+	Total Due______________________________$ <% out.println(1.13*pizza.getTotal());%><br><br>
+</p></div>
+
+
+<div id="tasks">
+	
+	<h3 class="status"> Status: <u><%out.println(pizza.getStatus());%></u><br><br>
+	<form action="changeStatus">
+<%	String phone = pizza.getPhone();
+	String time = pizza.getOrderTime(); 
+%>
+		<input type="hidden" name="phone" value="<%=phone%>">
+		<input type="hidden" name="time" value=" <%=time%> ">
+		<select name="status">
+			<option value="1">Ordered
+			<option value="2">Being Prepared
+			<option value="3">Ready for Pickup
+			<option value="4">Picked up by customer	
+		</select>		
+		<button class="pbutton"> Change Status </button>
+	</form></h3>
+</div>
+
+<% }%>
+
+</body>
+</html>
+
+
+
+

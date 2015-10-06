@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+
+<%@ page import="com.beans.*" %>
+<%@ page import="java.util.*" %>
+
+<html lang="en-US">
+	<head>
+		<meta charset = "utf-8">
+		<title> Pizza Forte </title>
+		<link type="text/css" rel="stylesheet" href="corporate.css"/>
+	</head>
+	<body>
+		<jsp:include page="header.jsp" />
+		<div id="login">
+		<form action="chefLogin" method="post">
+		<h2>
+			Username &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="accessid" style="height:30px;border-radius:5px;font-size:20px;"><br><br>
+			Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="password" name="password" style="height:30px;border-radius:5px;font-size:20px;"><br><br>
+			<button class="lbutton">Login</button><br>
+		</h2>
+		</form>
+		</div>	
+	</body>
+</html>

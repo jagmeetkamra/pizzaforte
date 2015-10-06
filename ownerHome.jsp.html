@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+
+<%@ page import="com.beans.*" %>
+<%@ page import="java.util.*" %>
+
+<html lang="en-US">
+	<head>
+		<meta charset = "utf-8">
+		<title> Pizza Forte </title>
+		<link type="text/css" rel="stylesheet" href="corporate.css"/>
+	</head>
+	<body>
+		<jsp:include page="header.jsp" />
+	
+		<div style="margin:0 auto;margin-top;5%;">
+		<form action="seeorderlistOwner">
+			<button class="sbutton"> See Orders </button>
+		</form>
+
+		<form action="viewchef">
+			<button class="sbutton"> View Chef </button>
+		</form>
+		<form action="registerchef.jsp">
+			<button class="sbutton"> Add Chef </button>
+		</form>
+		</div>
+	</body>
+</html>

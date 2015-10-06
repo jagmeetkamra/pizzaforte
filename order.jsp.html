@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+
+<%@ page import="com.beans.*" %>
+<%@ page import="java.util.*" %>
+
+<html lang="en-US">
+	<head>
+	<meta charset = "utf-8">
+	<title> Pizza Forte </title>
+	<link type="text/css" rel="stylesheet" href="pizza.css"/>
+			
+	<script src="code.js"></script>
+	</head>
+	<body>
+	
+	
+	<jsp:include page="header&nav.jsp" />
+	<div>
+	<aside>
+		<form id = "kamra" action="check1.jsp">
+		<jsp:include page="aside.jsp" />
+	</aside>
+	<section>
+		<div class="content">
+			<div align="center" style="padding:5px; height:100%;" >
+				<div id="size" style="padding:5px; float:left; width:330px;background-color: rgba(255,255,255,0.6);">
+					<h2>Size
+					<select name="size" onchange="displayTotal();" required>
+						<option value="1">Small
+						<option value="2">Medium
+						<option value="3">Large
+						<option value="4">Extra Large
+						<option value="5">Party Size
+       					</select></h2>
+				</div>
+				<div id="styleC" style="padding:5px; float:left; width:330px;background-color: rgba(255,255,255,0.6);">
+					<h2>Crust style
+					<select name="crustStyle">
+						<option value="1">Regular
+						<option value="2">Thin
+						<option value="3">Thick
+						<option value="4">Pretzel(Exclusive)
+					</select></h2>
+				</div>
+		
+				<div id="dough" style="float:left;width:330px;background-color: rgba(255,255,255,0.6);padding:5px;">		
+					<h2>Dough
+					<select name="dough" style="display:inline;">
+						<option value="1">Regular
+						<option value="2">Whole Wheat
+						<option value="3">Whole grain
+					</select></h2>
+			
+				</div>
+			</div><br><br><br><br><br><br>
+
+			<div id="toppings" style="min-height:550px;overflow:auto;">
+				<div id="meat" class="topMeat">
+					<h2>Meat ( &#162; 60 )</h2>
+					<button type="button" onclick="toggle_visibility('pepperoni');toggle_image('pep');cancel('pl','pep_amount');displayTotal();">
+					Pepperoni &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="long">|</span>&nbsp;
+					<img id="pep" src="plus.png" height="30" style="vertical-align:middle" onclick="cancel('pl','pep_amount');"></button>
+					<div id="pepperoni" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">
+					
+						<label>
+						<input type="radio" name="pl" value="LH" onchange="displayTotal();" onclick="extra_visible('pep_amount')">
+						Left Half &nbsp;&nbsp;
+						</label>
+						<label>
+						<input type="radio" name="pl" value="RH" onchange="displayTotal();" onclick="extra_visible('pep_amount')">
+						Right Half &nbsp;&nbsp;
+						</label>
+						<label>
+						<input type="radio" name="pl" value="W"  onchange="displayTotal();" onclick="extra_visible('pep_amount')">
+						Whole &nbsp;&nbsp;
+						</label>
+					
+						<input type="checkbox" name="pep_amount" value="2" onchange="displayTotal();" disabled>Extra ( add &#162; 10 )<br>
+					
+					</div><br><br>
+
+					<button type="button" onclick="toggle_visibility('grilCkn');toggle_image('gc');cancel('gcl','gc_amount');displayTotal					();">Grilled Chicken &nbsp;
+					<span class="long">|</span>&nbsp;
+					<img id="gc" src="plus.png" height="30" style="vertical-align:middle"></button>
+					<div id="grilCkn" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">
+						<label>
+						<input type="radio" name="gcl" value="LH" onchange="displayTotal();" onclick="extra_visible('gc_amount')">Left 									Half&nbsp;&nbsp;</label>					
+						<label>
+						<input type="radio" name="gcl" value="RH" onchange="displayTotal();" onclick="extra_visible('gc_amount')">Right Half
+								&nbsp;&nbsp;</label>
+						<label>
+						<input type="radio" name="gcl" value="W"  onchange="displayTotal();" onclick="extra_visible('gc_amount')">Whole
+							&nbsp;&nbsp;</label>
+						<label>
+						<input type="checkbox" name="gc_amount" value="2" disabled onchange="displayTotal();">Extra ( add &#162; 10 )<br></label>
+					</div><br><br>
+
+					<button type="button" onclick="toggle_visibility('bacon');toggle_image('bc');cancel('bcl','bc_amount');displayTotal();">
+					Bacon&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="long">|</span>&nbsp;
+					<img id="bc" src="plus.png" height="30" style="vertical-align:middle"></button>
+					<div id="bacon" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">
+						<input type="radio" name="bcl" value="LH" onchange="displayTotal();" onclick="extra_visible('bc_amount')">Left Half
+						<input type="radio" name="bcl" value="RH"  onchange="displayTotal();" onclick="extra_visible('bc_amount')">Right Half
+						<input type="radio" name="bcl" value="W" onchange="displayTotal();"  onclick="extra_visible('bc_amount')">Whole
+						<input type="checkbox" name="bc_amount" value="2" disabled onchange="displayTotal();" >Extra ( add &#162; 10 )<br>
+					</div><br><br>
+		
+					<button type="button" onclick="toggle_visibility('beef');toggle_image('bf');cancel('bfl','bf_amount');displayTotal();">
+					Beef&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="long">|</span>&nbsp;
+					<img id="bf" src="plus.png" height="30" style="vertical-align:middle"></button>
+					<div id="beef" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">	
+						<input type="radio" name="bfl" value="LH" onchange="displayTotal();" onclick="extra_visible('bf_amount')">Left Half
+						<input type="radio" name="bfl" value="RH" onchange="displayTotal();" onclick="extra_visible('bf_amount')">Right Half
+						<input type="radio" name="bfl" value="W" onchange="displayTotal();" onclick="extra_visible('bf_amount')">Whole
+						<input type="checkbox" name="bf_amount" value="2" onchange="displayTotal();" disabled>Extra ( add &#162; 10 )<br>
+					</div><br><br>
+
+					<button type="button" onclick="toggle_visibility('smkdHam');toggle_image('sh');cancel('shl','sh_amount');displayTotal();">
+					Smoked Ham &nbsp;&nbsp;&nbsp;&nbsp;<span class="long">|</span>&nbsp;
+					<img id="sh" src="plus.png" height="30" style="vertical-align:middle"></button>
+					<div id="smkdHam" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">
+						<input type="radio" name="shl" value="LH" onchange="displayTotal();" onclick="extra_visible('sh_amount')">Left Half
+						<input type="radio" name="shl" value="RH" onchange="displayTotal();" onclick="extra_visible('sh_amount')">Right Half
+						<input type="radio" name="shl" value="W" onchange="displayTotal();" onclick="extra_visible('sh_amount')">Whole
+						<input type="checkbox" name="sh_amount" value="2" onchange="displayTotal();" disabled>Extra ( add &#162; 10 )
+					</div><br><br>
+				</div>
+
+				<div id="veggie" class="topVeg">
+					<H2>Veggie ( &#162; 60 )</h2>
+					<button type="button" onclick="toggle_visibility('onions');toggle_image('on');cancel('onl','on_amount');displayTotal();">
+					Onions  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="long">|</span>&nbsp;
+					<img id="on" src="plus.png" height="30" style="vertical-align:middle"></button>
+					<div id="onions" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">
+						<input type="radio" name="onl" value="LH" onchange="displayTotal();" onclick="extra_visible('on_amount')">Left Half
+						<input type="radio" name="onl" value="RH" onchange="displayTotal();" onclick="extra_visible('on_amount')">Right Half
+						<input type="radio" name="onl" value="W" onchange="displayTotal();" onclick="extra_visible('on_amount')">Whole
+						<input type="checkbox" name="on_amount" value="2" onchange="displayTotal();">Extra ( add &#162; 10 )
+					</div><br><br>
+
+					<button type="button" onclick="toggle_visibility('blkOlv');toggle_image('bo');cancel('bol','bo_amount');displayTotal();">Black Olives
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="long">|</span>&nbsp;
+					<img id="bo" src="plus.png" height="30" style="vertical-align:middle"></button>
+					<div id="blkOlv" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">
+						<input type="radio" name="bol" value="LH" onchange="displayTotal();" onclick="extra_visible('bo_amount')">Left Half
+						<input type="radio" name="bol" value="RH" onchange="displayTotal();" onclick="extra_visible('bo_amount')">Right Half
+						<input type="radio" name="bol" value="W" onchange="displayTotal();" onclick="extra_visible('bo_amount')">Whole
+						<input type="checkbox" name="bo_amount" value="2" onchange="displayTotal();" disabled>Extra ( add &#162; 10 )
+					</div><br><br>
+
+					<button type="button" onclick="toggle_visibility('grnOlv');toggle_image('go');cancel('gol','go_amount');displayTotal();">Green Olives
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="long">|</span>&nbsp;
+					<img id="go" src="plus.png" height="30" style="vertical-align:middle"></button>
+					<div id="grnOlv" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">
+						<input type="radio" name="gol" value="LH" onchange="displayTotal();" onclick="extra_visible('go_amount')">Left Half
+						<input type="radio" name="gol" value="RH" onchange="displayTotal();" onclick="extra_visible('go_amount')">Right Half
+						<input type="radio" name="gol" value="W" onchange="displayTotal();" onclick="extra_visible('go_amount')">Whole 
+						<input type="checkbox" name="go_amount" value="2" onchange="displayTotal();" disabled>Extra ( add &#162; 10 )
+					</div><br><br>
+
+					<button type="button" onclick="toggle_visibility('mshrm');toggle_image('ms');cancel('mrl','mr_amount');displayTotal();">Mushrooms
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="long">|</span>&nbsp;
+					<img id="ms" src="plus.png" height="30" style="vertical-align:middle"></button>
+					<div id="mshrm" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">	
+						<input type="radio" name="mrl" value="LH" onchange="displayTotal();" onclick="extra_visible('mr_amount')">Left Half
+						<input type="radio" name="mrl" value="RH" onchange="displayTotal();" onclick="extra_visible('mr_amount')">Right Half
+						<input type="radio" name="mrl" value="W" onchange="displayTotal();" onclick="extra_visible('mr_amount')">Whole
+						<input type="checkbox" name="mr_amount" value="2" onchange="displayTotal();" disabled>Extra ( add &#162; 10 )
+					</div><br><br>
+
+					<button type="button" onclick="toggle_visibility('pineApl');toggle_image('pa');cancel('pal','pa_amount');displayTotal();">Pine Apple
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="long">|</span>&nbsp;
+					<img id="pa" src="plus.png" height="30" style="vertical-align:middle"></button>
+					<div id="pineApl" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">
+						<input type="radio" name="pal" value="LH" onchange="displayTotal();" onclick="extra_visible('pa_amount')">Left Half
+						<input type="radio" name="pal" value="RH" onchange="displayTotal();" onclick="extra_visible('pa_amount')">Right Half
+						<input type="radio" name="pal" value="W" onchange="displayTotal();" onclick="extra_visible('pa_amount')">Whole
+						<input type="checkbox" name="pa_amount" value="2" onchange="displayTotal();" disabled>Extra ( add &#162; 10 ) 
+					</div><br><br>
+				
+					<button type="button" onclick="toggle_visibility('sp');toggle_image('spn');cancel('spl','sp_amount');displayTotal();">Spinach
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="long">|</span>&nbsp;
+					<img id="spn" src="plus.png" height="30" style="vertical-align:middle"></button>
+					<div id="sp" style="visibility: hidden; display: none; background:#4E7C00;border: 3px solid white; padding:5px;border-radius:10px;color:white;font-family: Calibri, Arial, Sans-Serif;padding:5px;">
+						<input type="radio" name="spl" value="LH" onchange="displayTotal();" onclick="extra_visible('sp_amount')">Left Half
+						<input type="radio" name="spl" value="RH" onchange="displayTotal();" onclick="extra_visible('sp_amount')">Right Half
+						<input type="radio" name="spl" value="W" onchange="displayTotal();" onclick="extra_visible('sp_amount')">Whole
+						<input type="checkbox" name="sp_amount" value="2" onchange="displayTotal();" disabled>Extra ( add &#162; 10 )<br>
+					</div><br><br>
+				</div> 
+			</div><br>
+		</div>
+	
+		
+	
+     		<hr>
+       		<div class="content" style="text-align:center;overflow: auto;width:1053px;">
+          		 <jsp:include page="drinks.jsp" />
+       		</div> <br>
+	
+		<hr color="black">
+       		<div class="content" style="text-align:center;">
+          		<jsp:include page="sides.jsp" />
+       		</div>
+		
+		<br><br><br><br>
+		<input type="hidden" id="hiddenField" name="total" value="5.00"/>
+		<input type="hidden" id="hiddenField2" name="totalPlusTaxes" value="5.65"/>
+		<input type="hidden" id="hiddenField3" name="hst" value="0.65"/>
+		</form> 
+ 	
+	</section>
+	
+	</div>
+	</body> 
+</html>
+	

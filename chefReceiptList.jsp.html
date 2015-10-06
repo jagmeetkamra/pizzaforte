@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+
+<%@ page import="com.beans.*" %>
+<%@ page import="java.util.*" %>
+
+<html lang="en-US">
+	<head>
+		<meta charset = "utf-8">
+		<title> Pizza Forte </title>
+
+	
+<link type="text/css" rel="stylesheet" href="corporate.css"/>
+	</head>
+	<body>
+		<jsp:include page="header.jsp" />
+
+
+	<div id="tasks">
+
+	<table border="1px solid black">
+		<tr>
+			<th>No. </th>
+			<th>Phone Number</th>
+			<th>Time</th>
+			<th>Status</th>
+			<th></th>	
+		</tr>
+<%
+	if(session.getAttribute("allOrdersList")!=null)
+	{
+	System.out.println("allOrdersList is not null" );
+	List ordersList = (List)session.getAttribute("allOrdersList");
+	System.out.println(session.getAttribute("allOrdersList"));
+	System.out.println("order size : " + ordersList.size() );
+	for(int i = 0; i < ordersList.size(); i++){ 
+		System.out.println("allOrders is not null");
+		Pizza p = (Pizza)ordersList.get(i); 
+%>
+
+		<tr>
+			<td> <% out.println(i + 1); %> </td>
+			<td> <% out.println(p.getPhone()); %> </td>
+			<td> <% out.println(p.getOrderTime()); %> </td>
+			<td> <% out.println(p.getStatus()); %> </td>
+			<td> <form action="seeorder">
+			<% int j = i; 
+			   String phone = p.getPhone(); %>
+				<input type="hidden" name="index" value="<%=i%>" >
+				<input type="hidden" name="phone" value="<%=phone%>">
+				<button> View Receipt </button> 
+			    </form>
+			</td>	
+		</tr>
+<%	}
+	
+	
+		
+} %>
+
+
+	
+	</table>
+	</div>
+</body>
+</html>
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+
+<%@ page import="com.beans.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.lang.Int.*" %>
+
+<html lang="en-US">
+	<head>
+		<meta charset = "utf-8">
+		<title> Pizza Forte - Add/remove Chef </title>
+	<link type="text/css" rel="stylesheet" href="corporate.css"/>
+
+	</head>
+	<body>
+		<jsp:include page="header.jsp" />
+
+		<div id="tasks" align="center">
+
+		<table border="1px solid black">
+		<tr>
+			<th>Emp ID. </th>
+			<th>Name</th>
+			<th>Username</th>
+			<th></th>	
+		</tr>
+<%
+	if(session.getAttribute("allChefs")!=null)
+	{
+	System.out.println("allChefs is not null" );
+	List chefList = (List)session.getAttribute("allChefs");
+	for(int i = 0; i < chefList.size(); i++){ 
+		Chef c = (Chef)chefList.get(i); 
+%>
+		<tr>
+			<td> <% out.println(c.getEmpID()); %> </td>
+			<td> <% out.println(c.getName()); %> </td>
+			<td> <% out.println(c.getUsername()); %> </td>
+			<td> <form action="remove">
+<% 			 
+			String empID = c.getEmpID(); 
+%>
+				<input type="hidden" name="empID" value="<%=empID%>">
+				<button> Remove </button> 
+			    </form>
+			</td>	
+		</tr>
+<%	}
+	
+	
+		
+} %>
+
+
+	
+	</table>
+	</div>
+</body>
+</html>	
